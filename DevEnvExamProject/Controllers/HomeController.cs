@@ -7,6 +7,7 @@ namespace DevEnvExamProject.Controllers
 {
     public class HomeController : Controller
     {
+        //hej fra line
         public ActionResult Index()
         {
             return View();
