@@ -8,6 +8,7 @@ namespace DevEnvExamProject.Models
     {
         public int CompanyId { get; set; }
         public string Name { get; set; }
+        public ICollection<ApplicationUser> Users { get; set; }
         public virtual ICollection<Skill> Skills { get; set; }
     }
 }

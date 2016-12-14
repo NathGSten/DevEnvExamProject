@@ -21,11 +21,13 @@ namespace DevEnvExamProject
             if (!roleManager.RoleExists("Admin"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                Company company = new Company { Name = "LiSaNa" };
                 role.Name = "Admin";
                 roleManager.Create(role);
                 var user = new ApplicationUser();
                 user.UserName = "test";
                 user.Email = "test@test.com";
+                user.Company = company;
                 string userPWD = "Test123!";
                 var checkUser = userManager.Create(user, userPWD);
                 if (checkUser.Succeeded)

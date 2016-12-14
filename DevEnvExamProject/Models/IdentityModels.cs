@@ -17,6 +17,9 @@ namespace DevEnvExamProject.Models
         }
         //here
         //public string Username { get; set; }
+        public string Name { get; set; }
+        public int CompanyId { get; set; }
+        public virtual Company Company { get; set; }
         //public string Password { get; set; }
         //public static bool IsAdmin { get; set; }
     }
@@ -26,8 +29,8 @@ namespace DevEnvExamProject.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-        public DbSet<CompanyAdmin> CompanyAdmins { get; set; }
-        public DbSet<Employee> Employees { get; set; }
+        //public DbSet<CompanyAdmin> CompanyAdmins { get; set; }
+        //public DbSet<Employee> Employees { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<EmployeeSkill> EmployeeSkills { get; set; }
         public static ApplicationDbContext Create()
