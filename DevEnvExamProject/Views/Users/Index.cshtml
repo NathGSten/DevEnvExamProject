@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<h2>Index</h2>
+@if (ViewBag.displayMenu == "Yes")
+{
+    <h1>Welcome Admin. You can now create a user role</h1>
+    <h3>
+        @Html.ActionLink("Manage Role", "Index", "Role")
+    </h3>
+}
+else
+{
+    <h1>Welcome <strong>@ViewBag.Name</strong> :)</h1>
+}
+
+<profile>
+    <properties>
+        <add name="Name" allowAnonymous="true"/>
+        <add name="VisitedOn" type="System.DateTime" allowAnonymous="true"/>
+    </properties>
+</profile>
