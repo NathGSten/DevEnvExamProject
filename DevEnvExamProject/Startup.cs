@@ -35,10 +35,10 @@ namespace DevEnvExamProject
                     var result1 = userManager.AddToRole(user.Id, "Admin");
                 }
             }
-            if (!roleManager.RoleExists("Manager"))
+            if (!roleManager.RoleExists("Admin"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Manager";
+                role.Name = "Admin";
                 roleManager.Create(role);
             }
             if (!roleManager.RoleExists("Employee"))

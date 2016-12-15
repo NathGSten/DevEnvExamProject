@@ -65,6 +65,11 @@ namespace DevEnvExamProject.Controllers
         {
             if (!ModelState.IsValid)
             {
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email
+                };
                 return View(model);
             }
             // This doesn't count login failures towards account lockout
@@ -142,8 +147,10 @@ namespace DevEnvExamProject.Controllers
             if (ModelState.IsValid)
             {
                 // var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
-                var user = new ApplicationUser { Email = model.Email };
+                Company company = new Company { Name = model.Company };
+                var user = new ApplicationUser { UserName = model.Username, Email = model.Email, Company = company  };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                UserManager.AddToRole(user.Id, "Admin");
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
@@ -152,15 +159,53 @@ namespace DevEnvExamProject.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
+                    //await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
                     return RedirectToAction("Index", "Home"); //come back to this l8r
                 }
-                ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin")).ToList(), "Name", "Name");
+                //ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin")).ToList(), "Name", "Name");
                 AddErrors(result);
             }
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+
+        // GET: /Account/RegisterEmployee
+        [Authorize(Roles = "Admin")]
+        public ActionResult RegisterEmployee()
+        {
+            ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Employee")).ToList(), "Name", "Name");
+            return View();
+        }
+
+
+        // POST: /Account/RegisterEmployee
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterEmployee(RegisterViewModelEmployee model)
+        {
+            if (ModelState.IsValid)
+            {
+                // var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
+                //Company company = new Company { Name = model.Company };
+                var currentUser = UserManager.FindById(User.Identity.GetUserId());
+                //var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                var user = new ApplicationUser { UserName = model.Username, Email = model.Email, CompanyId = currentUser.CompanyId};
+                var result = await UserManager.CreateAsync(user, model.Password);
+                UserManager.AddToRole(user.Id, "Employee");
+                if (result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    return RedirectToAction("Index", "Users"); //come back to this l8r
+                }
+                //ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin")).ToList(), "Name", "Name");
+                AddErrors(result);
+            }
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
