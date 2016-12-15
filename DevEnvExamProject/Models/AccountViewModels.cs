@@ -54,13 +54,20 @@ namespace DevEnvExamProject.Models
         [Required]
         [Display(Name = "UserRoles")]
         public string UserRoles { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
         [Required]
         [Display(Name = "Username")]
         public string Username { get; set; }
+
+        [Required]
+        [Display(Name = "Company")]
+        public string Company { get; set; }
+
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
