@@ -11,7 +11,6 @@ using Microsoft.Owin.Security;
 using DevEnvExamProject.Models;
 namespace DevEnvExamProject.Controllers
 {
-    //ejfhekhgel
     [Authorize]
     public class AccountController : Controller
     {
