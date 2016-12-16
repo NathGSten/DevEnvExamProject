@@ -12,7 +12,7 @@ using DevEnvExamProject.Models;
 namespace DevEnvExamProject.Controllers
 {
 
-    //htju
+    //htju!!!
     [Authorize]
     public class AccountController : Controller
     {
