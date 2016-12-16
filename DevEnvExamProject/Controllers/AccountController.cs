@@ -48,7 +48,7 @@ namespace DevEnvExamProject.Controllers
                 _userManager = value;
             }
         }
-        //
+        
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -56,7 +56,7 @@ namespace DevEnvExamProject.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-        //
+        
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
@@ -89,7 +89,7 @@ namespace DevEnvExamProject.Controllers
                     return View(model);
             }
         }
-        //
+        
         // GET: /Account/VerifyCode
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
@@ -101,7 +101,7 @@ namespace DevEnvExamProject.Controllers
             }
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
-        //
+        
         // POST: /Account/VerifyCode
         [HttpPost]
         [AllowAnonymous]
@@ -129,7 +129,7 @@ namespace DevEnvExamProject.Controllers
                     return View(model);
             }
         }
-        //
+        
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
@@ -137,7 +137,7 @@ namespace DevEnvExamProject.Controllers
             ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin")).ToList(), "Name", "Name");
             return View();
         }
-        //
+        
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -169,7 +169,6 @@ namespace DevEnvExamProject.Controllers
             return View(model);
         }
 
-
         // GET: /Account/RegisterEmployee
         [Authorize(Roles = "Admin")]
         public ActionResult RegisterEmployee()
@@ -177,7 +176,6 @@ namespace DevEnvExamProject.Controllers
             ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Employee")).ToList(), "Name", "Name");
             return View();
         }
-
 
         // POST: /Account/RegisterEmployee
         [HttpPost]
@@ -194,10 +192,11 @@ namespace DevEnvExamProject.Controllers
                 var user = new ApplicationUser { UserName = model.Username, Email = model.Email, CompanyId = currentUser.CompanyId};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 UserManager.AddToRole(user.Id, "Employee");
+                
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                    return RedirectToAction("Index", "Users"); //come back to this l8r
+                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    return RedirectToAction("Index", "Manage"); //come back to this l8r
                 }
                 //ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin")).ToList(), "Name", "Name");
                 AddErrors(result);
@@ -206,7 +205,7 @@ namespace DevEnvExamProject.Controllers
             return View(model);
         }
 
-        //
+        
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
@@ -218,14 +217,14 @@ namespace DevEnvExamProject.Controllers
             var result = await UserManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
-        //
+        
         // GET: /Account/ForgotPassword
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
             return View();
         }
-        //
+        
         // POST: /Account/ForgotPassword
         [HttpPost]
         [AllowAnonymous]
@@ -250,21 +249,21 @@ namespace DevEnvExamProject.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-        //
+        
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
             return View();
         }
-        //
+        
         // GET: /Account/ResetPassword
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
             return code == null ? View("Error") : View();
         }
-        //
+        
         // POST: /Account/ResetPassword
         [HttpPost]
         [AllowAnonymous]
@@ -289,14 +288,14 @@ namespace DevEnvExamProject.Controllers
             AddErrors(result);
             return View();
         }
-        //
+        
         // GET: /Account/ResetPasswordConfirmation
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
         {
             return View();
         }
-        //
+        
         // POST: /Account/ExternalLogin
         [HttpPost]
         [AllowAnonymous]
@@ -306,7 +305,7 @@ namespace DevEnvExamProject.Controllers
             // Request a redirect to the external login provider
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
-        //
+        
         // GET: /Account/SendCode
         [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
@@ -320,7 +319,7 @@ namespace DevEnvExamProject.Controllers
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
-        //
+        
         // POST: /Account/SendCode
         [HttpPost]
         [AllowAnonymous]
@@ -338,7 +337,7 @@ namespace DevEnvExamProject.Controllers
             }
             return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
-        //
+        
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
@@ -354,11 +353,15 @@ namespace DevEnvExamProject.Controllers
             {
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
+
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
+
                 case SignInStatus.Failure:
+
                 default:
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
@@ -366,7 +369,7 @@ namespace DevEnvExamProject.Controllers
                     return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
         }
-        //
+        
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
         [AllowAnonymous]
@@ -375,7 +378,7 @@ namespace DevEnvExamProject.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Manage");
+                return RedirectToAction("Index", "Users");
             }
             if (ModelState.IsValid)
             {

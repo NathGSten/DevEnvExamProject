@@ -20,6 +20,9 @@ namespace DevEnvExamProject.Models
         public string Name { get; set; }
         public int CompanyId { get; set; }
         public virtual Company Company { get; set; }
+        public bool IsAdmin = false;
+        public string EmployeeProfilePicture { get; set; } //can inherit from a common interface?
+        public string EmployeeEducation { get; set; }
         //public string Password { get; set; }
         //public static bool IsAdmin { get; set; }
     }
@@ -30,7 +33,6 @@ namespace DevEnvExamProject.Models
         {
         }
         //public DbSet<CompanyAdmin> CompanyAdmins { get; set; }
-        //public DbSet<Employee> Employees { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<EmployeeSkill> EmployeeSkills { get; set; }
         public static ApplicationDbContext Create()

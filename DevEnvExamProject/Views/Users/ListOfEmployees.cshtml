@@ -1,0 +1,19 @@
+﻿@model IEnumerable<DevEnvExamProject.Models.ApplicationUser>
+
+
+<h2>Employees</h2>
+
+@*@for (var i = 0; i < ApplicationUser.Count; i++)
+{
+    
+}*@
+
+@foreach (var item in Model)
+{
+    @item.UserName <br />
+    @item.Email<br />
+    @Html.ActionLink("See Employee Information", "", "")<br />
+    <br />
+
+} 
+

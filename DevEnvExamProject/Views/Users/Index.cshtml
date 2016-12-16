@@ -8,9 +8,12 @@
     <h3>
         @Html.ActionLink("Manage Role", "Index", "Role")
     </h3>
-    <dt>Add Employee:</dt>
             <dd>
                 @Html.ActionLink("Add Employee", "RegisterEmployee", "Account")
+            </dd>
+            <br />
+            <dd>
+                @Html.ActionLink("See Employees", "ListOfEmployees", "Users")
             </dd>
 }
 else
