@@ -11,8 +11,6 @@ using Microsoft.Owin.Security;
 using DevEnvExamProject.Models;
 namespace DevEnvExamProject.Controllers
 {
-
-    //htju!!!
     [Authorize]
     public class AccountController : Controller
     {
