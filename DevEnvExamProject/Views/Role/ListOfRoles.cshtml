@@ -1,7 +1,6 @@
-﻿@model IEnumerable<DevEnvExamProject.Models.ApplicationUser>
+﻿@model IEnumerable<DevEnvExamProject.Models.Skill>
 
-<h2>Employees</h2>
-
+<h2>ListOfRoles</h2>
 
 @foreach (var item in Model)
 {
@@ -9,5 +8,5 @@
     @item.Email<br />
     @Html.ActionLink("See Employee Information", "", "")<br />
     <br />
-} 
 
+} 

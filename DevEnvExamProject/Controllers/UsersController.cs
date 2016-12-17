@@ -12,7 +12,7 @@ namespace DevEnvExamProject.Controllers
 {
     public class UsersController : Controller
     {
-        public object UserName { get; private set; }
+        public object UserName { get; set; }
         private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationUserManager _userManager;
         ApplicationDbContext context;

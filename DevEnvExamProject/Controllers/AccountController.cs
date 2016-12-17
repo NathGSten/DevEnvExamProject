@@ -74,7 +74,9 @@ namespace DevEnvExamProject.Controllers
             }
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
+            Console.Beep();
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            
             switch (result)
             {
                 case SignInStatus.Success:
@@ -148,7 +150,7 @@ namespace DevEnvExamProject.Controllers
             {
                 // var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
                 Company company = new Company { Name = model.Company };
-                var user = new ApplicationUser { UserName = model.Username, Email = model.Email, Company = company  };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Name = model.FullName, Company = company  };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 UserManager.AddToRole(user.Id, "Admin");
                 if (result.Succeeded)
@@ -189,7 +191,7 @@ namespace DevEnvExamProject.Controllers
                 //Company company = new Company { Name = model.Company };
                 var currentUser = UserManager.FindById(User.Identity.GetUserId());
                 //var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                var user = new ApplicationUser { UserName = model.Username, Email = model.Email, CompanyId = currentUser.CompanyId};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, CompanyId = currentUser.CompanyId};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 UserManager.AddToRole(user.Id, "Employee");
                 

@@ -4,10 +4,8 @@
 <h2>Index</h2>
 @if (ViewBag.displayMenu == "Yes")
 {
-    <h1>Welcome Admin. You can now create a user role</h1>
-    <h3>
-        @Html.ActionLink("Manage Role", "Index", "Role")
-    </h3>
+    <h1>Welcome Admin</h1>
+<br />
             <dd>
                 @Html.ActionLink("Add Employee", "RegisterEmployee", "Account")
             </dd>
@@ -15,6 +13,14 @@
             <dd>
                 @Html.ActionLink("See Employees", "ListOfEmployees", "Users")
             </dd>
+            <dd>
+                @Html.ActionLink("Add Roles", "AddRole", "Role")
+            </dd>
+            <br />
+            <dd>
+                @Html.ActionLink("See Roles", "ListOfRoles", "Role")
+            </dd>
+            <br />
 }
 else
 {
