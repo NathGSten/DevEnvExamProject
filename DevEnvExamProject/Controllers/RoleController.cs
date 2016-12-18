@@ -16,9 +16,11 @@ namespace DevEnvExamProject.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         ApplicationDbContext context;
+        public List<string> CompanyRole { get; set; }
         public void SkillController()
         {
             context = new ApplicationDbContext();
+            this.CompanyRole = new List<string>();
         }
         
         // GET: Role
@@ -40,30 +42,24 @@ namespace DevEnvExamProject.Controllers
             return View(Roles);
         }
 
-        //[Authorize(Roles = "Admin")]
-        //public ActionResult ListOfRoles()
-        //{
-        //    var currentUser = UserManager.FindById(User.Identity.GetUserId());
-        //    var companyUsers = db.Users.Where(i => i.CompanyId == currentUser.CompanyId).ToList();
-
-        //    return View(companyUsers);
-        //}
-
-        // GET: /Account/Register
+        // GET: /Role/AddRole
         [Authorize(Roles = "Admin")]
         public ActionResult AddRole()
         {
             return View();
         }
 
-        // POST: /Account/Register
-        //[HttpPost]
-        //[Authorize(Roles = "Admin")]
-        //public ActionResult AddRole(RoleViewModel model, RegisterViewModel model)
-        //{
-        //    return View();
-        //}
+        // POST: /Role/AddRole
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public ActionResult AddRole(RoleViewModel rolemodel, ApplicationUser registermodel, Skill Skill)
+        {
+            var skill = new Skill { SkillName = rolemodel.RoleName, CompanyId = registermodel.CompanyId, SkillDescription = rolemodel.RoleDescription};
+            //db.SaveChanges(skill);
+            return View(skill);
+        }
 
+        // /Role/ListOfRole
         [Authorize(Roles = "Admin")]
         public ActionResult ListOfRoles( )
         {

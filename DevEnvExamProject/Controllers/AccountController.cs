@@ -148,7 +148,6 @@ namespace DevEnvExamProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                // var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
                 Company company = new Company { Name = model.Company };
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Name = model.FullName, Company = company  };
                 var result = await UserManager.CreateAsync(user, model.Password);
