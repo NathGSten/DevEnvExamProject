@@ -1,0 +1,14 @@
+﻿@*@model IEnumerable<DevEnvExamProject.Models.Company>*@
+
+<h3>See Company Information</h3>
+
+
+@*@foreach (var item in Model)
+{
+    @item.CompanyName <br />
+    @item.CompanyDescription<br />
+    <br />
+}*@ 
+
+@Html.ActionLink("Go Back", "Index", "Users")
+

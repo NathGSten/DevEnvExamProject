@@ -67,5 +67,38 @@ namespace DevEnvExamProject.Controllers
 
             return View(companyUsers);
         }
+
+        public ActionResult SeeProfile()
+        {
+            var currentUser = UserManager.FindById(User.Identity.GetUserId());
+
+            var companyUsers = db.Users.Where(i => i.CompanyId == currentUser.CompanyId).ToList();
+
+            return View(companyUsers);
+        }
+
+        public ActionResult AddProfile()
+        {
+            
+            return View();
+        }
+
+        public ActionResult AddCompanyInformation()
+        {
+            var currentUser = UserManager.FindById(User.Identity.GetUserId());
+
+            var companyUsers = db.Users.Where(i => i.CompanyId == currentUser.CompanyId).ToList();
+
+            return View(companyUsers);
+        }
+
+        public ActionResult SeeCompanyInformation()
+        {
+            var currentUser = UserManager.FindById(User.Identity.GetUserId());
+            var companyUsers = db.Users.Where(i => i.CompanyId == currentUser.CompanyId).ToList();
+
+            ViewBag.UserId = currentUser;
+            return View(companyUsers);
+        }
     }
 }

@@ -64,17 +64,18 @@ namespace DevEnvExamProject.Controllers
         //    return View();
         //}
 
-        //[Authorize(Roles = "Admin")]
-        //public ActionResult ListOfEmployees(RoleViewModel model)
-        //{
-        //    var Skill = new Skill { SkillName = model.RoleName, SkillDescription = model.RoleDescription };
-        //    var currentUser = UserManager.FindById(User.Identity.GetUserId());
-        //    var companyUsers = db.Users.Where(i => i.CompanyId == currentUser.CompanyId).ToList();
+        [Authorize(Roles = "Admin")]
+        public ActionResult ListOfRoles( )
+        {
+            //    var Skill = new Skill { SkillName = model.RoleName, SkillDescription = model.RoleDescription };
+            //    var currentUser = UserManager.FindById(User.Identity.GetUserId());
+            //    var companyUsers = db.Users.Where(i => i.CompanyId == currentUser.CompanyId).ToList();
 
-        //    return View(companyUsers);
+            //    return View(companyUsers);
+            return View();
 
 
-        //}
+        }
 
 
 

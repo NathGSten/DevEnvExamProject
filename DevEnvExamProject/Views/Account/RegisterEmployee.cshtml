@@ -1,22 +1,22 @@
 ﻿@model DevEnvExamProject.Models.RegisterViewModelEmployee
 
 @{
-    ViewBag.Title = "RegisterEmployee";
+    ViewBag.Title = "Add Employee";
 }
 
 
-<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Title</h3>
 @using (Html.BeginForm("RegisterEmployee", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
+    <h4>Create a new employee</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
 
     <div class="form-group">
-        @Html.LabelFor(m => m.Username, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.FullName, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
@@ -38,18 +38,20 @@
         </div>
     </div>
     @*<div class="form-group">
-        @* @Html.LabelFor("User Role", new { @class = "col-md-2 control-label" })*@
-    @*<div class="col-md-10"> *@
-    @*@Html.DropDownList("Name") *@
-    @*@Html.DropDownList("UserRoles", (SelectList)ViewBag.Name, " ")
-            </ div >
-        </ div > *@
+        @Html.LabelFor("User Role", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownList("Name") 
+            @Html.DropDownList("UserRoles", (SelectList)ViewBag.Name, " ")
+        </div >
+    </div >*@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register Employee" />
+            <input type="submit" class="btn btn-default" value="Add Employee" />
         </div>
     </div>
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+@Html.ActionLink("Go Back", "Index", "Users")

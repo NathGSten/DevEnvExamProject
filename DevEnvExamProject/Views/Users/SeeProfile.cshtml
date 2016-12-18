@@ -1,0 +1,13 @@
+﻿@model IEnumerable<DevEnvExamProject.Models.ApplicationUser>
+
+<h2>See Profile Information</h2>
+
+
+@foreach (var item in Model)
+{
+        @item.UserName <br />
+        @item.Email<br />
+        <br />
+} 
+
+@Html.ActionLink("Go Back", "Index", "Users")

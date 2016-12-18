@@ -191,7 +191,7 @@ namespace DevEnvExamProject.Controllers
                 //Company company = new Company { Name = model.Company };
                 var currentUser = UserManager.FindById(User.Identity.GetUserId());
                 //var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, CompanyId = currentUser.CompanyId};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Name = model.FullName, CompanyId = currentUser.CompanyId};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 UserManager.AddToRole(user.Id, "Employee");
                 

@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<DevEnvExamProject.Models.ApplicationUser>
 
-<h2>Employees</h2>
+<h3>List of Employees</h3>
 
 
 @foreach (var item in Model)
@@ -11,3 +11,4 @@
     <br />
 } 
 
+@Html.ActionLink("Go Back", "Index", "Users")

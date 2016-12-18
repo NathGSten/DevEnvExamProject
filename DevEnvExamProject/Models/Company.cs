@@ -10,7 +10,9 @@ namespace DevEnvExamProject.Models
         
         // hello hello
         public int CompanyId { get; set; }
+        public string CompanyName { get; set; }
         public string Name { get; set; }
+        public string CompanyDescription { get; set; }
         public ICollection<ApplicationUser> Users { get; set; }
         public virtual ICollection<Skill> Skills { get; set; }
     }

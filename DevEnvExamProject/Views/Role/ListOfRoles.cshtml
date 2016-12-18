@@ -1,12 +1,16 @@
 ﻿@model IEnumerable<DevEnvExamProject.Models.Skill>
 
-<h2>ListOfRoles</h2>
+<h2>List of Roles</h2>
 
-@foreach (var item in Model)
-{
-    @item.UserName <br />
-    @item.Email<br />
-    @Html.ActionLink("See Employee Information", "", "")<br />
-    <br />
+@*@foreach (var item in Model)
+    {
+        @item.SkillName <br />
+        @item.SkillDescription<br />
+        @Html.ActionLink("See Employees with this skill", "", "")<br />
+        <br />
 
-} 
+    // SEE WHO CAN BE THE SPECIFIC ROLE REGARDING TEAMS
+        
+    } *@
+
+@Html.ActionLink("Go Back", "Index", "Users")

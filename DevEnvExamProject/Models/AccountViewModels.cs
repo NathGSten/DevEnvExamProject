@@ -78,9 +78,21 @@ namespace DevEnvExamProject.Models
         [Display(Name = "Role Name")]
         public string RoleName { get; set; }
         [Required]
-        [EmailAddress]
         [Display(Name = "Role Description")]
         public string RoleDescription { get; set; }
+    }
+
+    public class ProfileViewModel
+    {
+        [Required]
+        [Display(Name = "Grade Your Experience")]
+        public string GradeExperience { get; set; }
+        [Required]
+        [Display(Name = "Years of Experience")]
+        public string YearsOfExperience { get; set; }
+        [Required]
+        [Display(Name = "Last time the Role was used")]
+        public string LastTimeRoleWasUsed { get; set; }
     }
 
     public class RegisterViewModelEmployee
@@ -90,8 +102,8 @@ namespace DevEnvExamProject.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
         [Required]
-        [Display(Name = "Username")]
-        public string Username { get; set; }
+        [Display(Name = "Employee Name")]
+        public string FullName { get; set; }
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]

@@ -1,31 +1,80 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-<h2>Index</h2>
-@if (ViewBag.displayMenu == "Yes")
+    @if (ViewBag.displayMenu == "Yes")
 {
-    <h1>Welcome Admin</h1>
-<br />
-            <dd>
-                @Html.ActionLink("Add Employee", "RegisterEmployee", "Account")
-            </dd>
-            <br />
-            <dd>
-                @Html.ActionLink("See Employees", "ListOfEmployees", "Users")
-            </dd>
-            <dd>
-                @Html.ActionLink("Add Roles", "AddRole", "Role")
-            </dd>
-            <br />
-            <dd>
-                @Html.ActionLink("See Roles", "ListOfRoles", "Role")
-            </dd>
-            <br />
-}
-else
-{
-    <h1>Welcome <strong>@ViewBag.Name</strong> :)</h1>
-}
+    <h3>Welcome <strong>@ViewBag.Name</strong></h3>
+    <br />
+
+        <h5>Profile</h5>
+    <dd>
+         @Html.ActionLink("See Profile Information", "SeeProfile", "Users")
+    </dd>
+    <dd>
+        @Html.ActionLink("Add Profile Information", "AddProfile", "Users")
+    </dd>
+    <br />
+
+        <h5>Employees</h5>
+    <dd>
+        @Html.ActionLink("Add Employee", "RegisterEmployee", "Account")
+    </dd>
+    <dd>
+        @Html.ActionLink("See Employees", "ListOfEmployees", "Users")
+    </dd>
+    <br />
+
+        <h5>Roles</h5>
+    <dd>
+        @Html.ActionLink("Add Roles", "AddRole", "Role")
+    </dd>
+    <dd>
+        @Html.ActionLink("See Roles", "ListOfRoles", "Role")
+    </dd>
+    <br />
+
+        <h5>Company</h5>
+    <dd>
+        @Html.ActionLink("Add Company Information", "AddCompanyInformation", "Users")
+    </dd>
+    <dd>
+        @Html.ActionLink("See Company Information", "SeeCompanyInformation", "Users")
+    </dd>
+    <br />
+
+    }
+    else
+    {
+    <h3>Welcome <strong>@ViewBag.Name</strong></h3>
+
+        <h5>Profile</h5>
+    <dd>
+         @Html.ActionLink("See Profile", "SeeProfile", "Users")
+    </dd>
+    <dd>
+         @Html.ActionLink("Add Profile", "AddProfile", "Users")
+    </dd>
+    <br />
+
+        <h5>Employees</h5>
+    <dd>
+         @Html.ActionLink("See Employees", "ListOfEmployees", "Users")
+    </dd>
+    <br />
+
+        <h5>Roles</h5>
+    <dd>
+         @Html.ActionLink("See Roles", "ListOfRoles", "Role")
+    </dd>
+    <br />
+
+        <h5>Company</h5>
+    <dd>
+         @Html.ActionLink("See Company Information", "SeeCompanyInformation", "Users")
+    </dd>
+    <br />
+
+    }
 
 <profile>
     <properties>
